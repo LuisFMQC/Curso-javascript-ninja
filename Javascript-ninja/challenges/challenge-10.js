@@ -203,13 +203,13 @@ a mensagem de erro será mostrada no console.
 */
 
 operationSignal = '$';
-var multiplication = calculator(operationSignal);
+var testeError = calculator(operationSignal);
 
-if( multiplication ){
+if( testeError ){
     number1 = 3;
     number2 = 5;
     console.log(showOperationMessage(operationSignal, number1, number2));
-    console.log(multiplication(number1, number2));
+    console.log(testeError(number1, number2));
 } else {
     console.log(showErrorMessage(operationSignal));
 }
