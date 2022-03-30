@@ -45,10 +45,8 @@ console.log ( brasil );
 Remova o primeiro estado do array `brasil` e mostre-o no console.
 */
 
-brasil.shift();
-
 console.log( '\nEstado removido:' );
-console.log( brasil );
+console.log( brasil.shift() );
 
 
 /*
@@ -146,13 +144,7 @@ var every = brasil.every(function(item){
     return item.length > 7;
 })
 console.log( '\nTodos os estados de `brasil` tem mais de 7 letras?' );
-if ( every ){
-    console.log( 'Sim, todos os estados tem mais de 7 letras!' );
-} else {
-    console.log( 'Nem todos os estados tem mais de 7 letras!' );
-}
-
-//console.log( every === true ? 'Sim, todos os estados tem mais de 7 letras!' : 'Nem todos os estados tem mais de 7 letras!');
+console.log( every ? 'Sim, todos os estados tem mais de 7 letras!' : 'Nem todos os estados tem mais de 7 letras!');
 
 
 
@@ -169,11 +161,7 @@ var some = brasil.some(function(item){
     return item === 'Ceará';
 })
 console.log( '\nCeará está incluído em `brasil`?' );
-if ( some ){
-    console.log( 'Ceará está incluído!' );
-} else {
-    console.log( 'Ceará não está incluído!' );
-}
+console.log( some ? 'Ceará está incluído!' : 'Ceará não foi incluído!');
 
 
 /*
