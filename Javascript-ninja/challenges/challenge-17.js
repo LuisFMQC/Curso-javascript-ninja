@@ -148,5 +148,5 @@ function replaceDate(regex, dia, mes, ano){
     return dia + '/' + getMonthNumber(mes) + '/' + ano;
 };
 
-console.log(text.replace( regexDate, replaceDate) );
+console.log(text.replace(  regexDate, replaceDate) );
 })();
