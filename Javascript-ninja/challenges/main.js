@@ -1,9 +1,13 @@
-(function(){
+(function(win, doc){
     'use strict';
-    var obj = {
-        prop1: 'prop1',
-        prop1: 'prop2',
-        prop3: 'prop3'
-    }
-    console.log(obj);
-})();
+    
+    var $inputUsername = doc.querySelector( '#username' );
+    var $inputPassword = doc.querySelector( '#password' );
+    var $button = doc.querySelector( '#button' );
+
+    $button.addEventListener( 'submit', function(event) {
+        event.preventDefault();
+        console.log('click no botão');
+    }, false );
+
+})(window, document);
