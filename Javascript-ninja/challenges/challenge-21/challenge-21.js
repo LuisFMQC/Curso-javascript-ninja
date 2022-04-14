@@ -23,14 +23,8 @@ var $buttonStop = doc.querySelector('[data-js="stop"');
 var $buttonReset = doc.querySelector('[data-js="reset"');
 var temporizador;
 
-
-
-
-
 $buttonStart.addEventListener('click', start, false);
-
 $buttonStop.addEventListener('click', stop, false);
-
 $buttonReset.addEventListener('click', reset, false);
 
 function start(){
