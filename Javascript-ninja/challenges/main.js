@@ -1,13 +1,12 @@
 (function(win, doc){
     'use strict';
     
-    var $inputUsername = doc.querySelector( '#username' );
-    var $inputPassword = doc.querySelector( '#password' );
-    var $button = doc.querySelector( '#button' );
+    console.log('inicio');
+    
+    setTimeout(function(){
+        console.log( 'executou setTimeout' );
+    }, 1000);
 
-    $button.addEventListener( 'submit', function(event) {
-        event.preventDefault();
-        console.log('click no botão');
-    }, false );
+    console.log('fim')
 
 })(window, document);
