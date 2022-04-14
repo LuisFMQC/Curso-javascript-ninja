@@ -14,7 +14,7 @@ de valor para cada propriedade.
 var person = {
     name: 'Luis Fernando',
     lastname: 'Carvalho',
-    age: 28
+    age: 2
 };
 
 
