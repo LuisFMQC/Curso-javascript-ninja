@@ -28,12 +28,8 @@ $buttonStop.addEventListener('click', stop, false);
 $buttonReset.addEventListener('click', reset, false);
 
 function start(){
-    $counter.value--;
+    $counter.value++;
     temporizador = setTimeout(start, 1000);
-    if($counter.value === '0'){
-        alert('Acabou!');
-        stop();  
-    }
 }
 
 function stop(){
