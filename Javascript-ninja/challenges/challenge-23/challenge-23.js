@@ -24,23 +24,23 @@ input;
 - Ao pressionar o botão "CE", o input deve ficar zerado.
 */
 
-var $visor = doc.querySelector('[data-id="input-visor"]');
-var $buttonsNumbers = doc.querySelectorAll('[data-js="button-number"]');
-var $buttonCe = doc.querySelector('[data-js="button-ce"]');
-var $buttonsOperators = doc.querySelectorAll('[data-js="button-operation"]');
-var $buttonEqual = doc.querySelector('[data-js="button-equal"]');
+var $visor = doc.querySelector( '[data-id="input-visor"]' );
+var $buttonsNumbers = doc.querySelectorAll( '[data-js="button-number"]' );
+var $buttonCe = doc.querySelector( '[data-js="button-ce"]' );
+var $buttonsOperators = doc.querySelectorAll( '[data-js="button-operation"]' );
+var $buttonEqual = doc.querySelector( '[data-js="button-equal"]' );
 
-Array.prototype.forEach.call( $buttonsNumbers, function(buttons){
+Array.prototype.forEach.call( $buttonsNumbers, function( buttons ){
   buttons.addEventListener( 'click', clickNumber, false);
 });
-Array.prototype.forEach.call( $buttonsOperators, function(buttonsOp){
-  buttonsOp.addEventListener( 'click', clickOp, false);
+Array.prototype.forEach.call( $buttonsOperators, function( buttonsOp ){
+  buttonsOp.addEventListener( 'click', clickOp, false );
 });
-$buttonCe.addEventListener( 'click', clickCe, false);
-$buttonEqual.addEventListener( 'click', clickEqual, false);
+$buttonCe.addEventListener( 'click', clickCe, false );
+$buttonEqual.addEventListener( 'click', clickEqual, false );
 
 function clickOp(){
-  $visor.value = removeOperator($visor.value);
+  $visor.value = removeOperator( $visor.value );
   $visor.value += this.value;
 }
 
@@ -54,36 +54,40 @@ function clickNumber(){
 
 function isLastItemAnOp(number){
   var operations = ['+', '-', 'x', '÷'];
-  var lastItem = number.split('').pop();
-  return operations.some(function(operator){
+  var lastItem = number.split( '' ).pop();
+  return operations.some( function( operator ){
     return operator === lastItem;
   });
 }
 
 function clickEqual(){
-  $visor.value = removeOperator($visor.value);
-  var allValues = $visor.value.match(/\d+[+x÷-]?/g);
-  $visor.value = allValues.reduce(function(accumulated, actual){
+  $visor.value = removeOperator( $visor.value );
+  var allValues = $visor.value.match( /\d+[+x÷-]?/g );
+  $visor.value = allValues.reduce( function( accumulated, actual ){
     var firstValue = accumulated.slice(0, -1);
     var operator = accumulated.split('').pop();
-    var lastValue = removeOperator(actual);
-    var lastOperator = isLastItemAnOp(actual) ? actual.split('').pop() : '';
-    switch(operator){
-      case '+':
-        return ( +firstValue + +lastValue ) + lastOperator;
-      case '-':
-        return ( +firstValue - +lastValue ) + lastOperator;
-      case 'x':
-        return ( +firstValue * +lastValue ) + lastOperator;
-      case '÷':
-        return ( +firstValue / +lastValue ) + lastOperator;
-    };
+    var lastValue = removeOperator( actual );
+    var lastOperator = isLastItemAnOp( actual ) ? actual.split( '' ).pop() : '';
+    return calc( operator, lastOperator, firstValue, lastValue );
   })
 }
 
-function removeOperator(number){
-  if(isLastItemAnOp(number))
-    return number.slice(0, -1);
+function calc( operator, lastOperator, firstValue, lastValue ){
+  switch( operator ){
+    case '+':
+      return ( +firstValue + +lastValue ) + lastOperator;
+    case '-':
+      return ( +firstValue - +lastValue ) + lastOperator;
+    case 'x':
+      return ( +firstValue * +lastValue ) + lastOperator;
+    case '÷':
+      return ( +firstValue / +lastValue ) + lastOperator;
+  };
+}
+
+function removeOperator( number ){
+  if(isLastItemAnOp( number ))
+    return number.slice( 0, -1 );
   return number;
 }
 
