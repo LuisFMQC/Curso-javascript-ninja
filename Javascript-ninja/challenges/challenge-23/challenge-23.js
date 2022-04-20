@@ -68,11 +68,11 @@ function clickEqual(){
     var operator = accumulated.split('').pop();
     var lastValue = removeOperator( actual );
     var lastOperator = isLastItemAnOp( actual ) ? actual.split( '' ).pop() : '';
-    return calc( operator, lastOperator, firstValue, lastValue );
+    return resultOp( operator, lastOperator, firstValue, lastValue );
   })
 }
 
-function calc( operator, lastOperator, firstValue, lastValue ){
+function resultOp( operator, lastOperator, firstValue, lastValue ){
   switch( operator ){
     case '+':
       return ( +firstValue + +lastValue ) + lastOperator;
