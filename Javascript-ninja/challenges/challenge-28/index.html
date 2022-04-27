@@ -3,8 +3,21 @@
 <head>
     <meta charset="utf-8" />
     <title>Challenge 28</title>
+    <style>
+      [data-js="cep-info"]{
+        max-width: 400px;
+        background-color: aquamarine;
+      }
+      h2{
+        background-color:brown;
+      }
+      span{
+        font-style: italic;
+      }
+    </style>
 </head>
 <body>
+
   <form data-js="form-cep">
       <label>CEP a ser consultado:</label>
       <input type="text"  data-js="consultacep"/>
@@ -23,5 +36,6 @@
     <p><strong>CEP:</strong> <span data-js="cep">-</span></p>
   </div>
     <script src="challenge-28.js"></script>
+    <!-- <script src="/Javascript-ninja/challenges/challenge-28/node_modules/cors/lib/index.js"></script> -->
 </body>
 </html>
