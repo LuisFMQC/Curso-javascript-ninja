@@ -1,15 +1,24 @@
 (function(win, doc){
     'use strict';
 
- var ajax = new XMLHttpRequest();
- ajax.open('GET', 'data/data.json')
- ajax.send();
+  var ajax = new XMLHttpRequest();
+  ajax.open('GET', 'data/data.xml')
+  ajax.send();
 
- console.log('Carregando...')
+  console.log('Carregando...')
 
+  var response = '';
   ajax.addEventListener('readystatechange', function() {
     if( isRequestOk() ){
-      console.log('Requisição ok :)');
+      try{
+        response = JSON.parse(ajax.responseText);
+      }
+      catch(e){
+        response = ajax.responseText;
+      }
+      console.log(response);
+      /* var data = JSON.parse(ajax.responseText)
+      console.log('Requisição ok :)\n', data.message); */
     }
   }, false)
 
