@@ -112,7 +112,7 @@
   var $cep = new DOM('[data-js="cep"]');
   var $status = new DOM('[data-js="status"]');
   var ajax = new XMLHttpRequest();
-  var endereco;
+  var adress;
 
   $formCEP.on('submit', handleSubmitCep);
 
@@ -126,18 +126,10 @@
   }
 
   function handleAjaxReadyStateChange(){
-    if( ajax.status !== 200 ){
-      getMessages('error');
-      endereco = clearData()
-      $logradouro.get()[0].textContent = endereco.logradouro;
-      $estado.get()[0].textContent = endereco.uf;
-      $cidade.get()[0].textContent = endereco.localidade;
-      $bairro.get()[0].textContent = endereco.bairro;
-      $cep.get()[0].textContent = endereco.cep;
-    }
-    else{
+    if( isRequestOk() )
       fillCEPFields();
-    }
+    if( isRequestNotOk() )
+      erro400();
   }
 
   function getUrl(){
@@ -152,28 +144,30 @@
     return ajax.readyState === 4 && ajax.status === 200;
   }
 
+  function isRequestNotOk(){
+    return ajax.readyState === 4 && ajax.status !== 200;
+  }
+
   function fillCEPFields(){
-    var endereco = parseData();
-    if(endereco === null){
+    adress = parseData();
+
+    if( adress.erro === 'true'){
       getMessages('error');
-      endereco = clearData();
-    }
-    if(endereco.erro === 'true'){
-      getMessages('error');
-      endereco = clearData();
+      adress = clearData();
+      setData(adress);
     }
     else{
-    getMessages('ok');
-    $logradouro.get()[0].textContent = endereco.logradouro;
-    $estado.get()[0].textContent = endereco.uf;
-    $cidade.get()[0].textContent = endereco.localidade;
-    $bairro.get()[0].textContent = endereco.bairro;
-    $cep.get()[0].textContent = endereco.cep;
-
+      getMessages('ok');
+      setData(adress);
     }
-
-
   }
+
+  function erro400(){
+    getMessages('error');
+    adress = clearData();
+    setData(adress);
+  }
+
 
   function clearData(){
     return {
@@ -196,7 +190,6 @@
     return result;
   }
 
-
   function getMessages(type){
       var messages = {
       loading: replaceCEP('Buscando informações para o CEP: [CEP]...'),
@@ -209,4 +202,13 @@
   function replaceCEP(message){
       return message.replace('[CEP]', getCepClean());
   }
+
+  function setData(adress){
+    $logradouro.get()[0].textContent = adress.logradouro;
+    $estado.get()[0].textContent = adress.uf;
+    $cidade.get()[0].textContent = adress.localidade;
+    $bairro.get()[0].textContent = adress.bairro;
+    $cep.get()[0].textContent = adress.cep;
+  }
+
 })(document);
