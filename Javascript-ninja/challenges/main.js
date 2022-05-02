@@ -2,7 +2,7 @@
     'use strict';
 
   var ajax = new XMLHttpRequest();
-  ajax.open('GET', 'data/data.xml')
+  ajax.open('GET', 'data/data.json');
   ajax.send();
 
   console.log('Carregando...')
@@ -16,7 +16,7 @@
       catch(e){
         response = ajax.responseText;
       }
-      console.log(response);
+      console.log(response.message);
       /* var data = JSON.parse(ajax.responseText)
       console.log('Requisição ok :)\n', data.message); */
     }
