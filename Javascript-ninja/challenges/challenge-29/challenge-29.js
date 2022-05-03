@@ -1,4 +1,4 @@
-(function(DOM) {
+(function($) {
   'use strict';
 
   /*
@@ -36,24 +36,67 @@
 
 
     return {
-      init: function(){
+      init: function init(){
         this.autoAjaxCompany();
+        this.initEvents();
       },
+
+      initEvents: function initEvents(){
+        $('[data-js="form-cars"]').on('submit', this.handleSubmitCar);
+      },
+
+      handleSubmitCar: function handleSubmitCar(event){
+        event.preventDefault();
+        var $tableCar = $('[data-js="table-cars"]').get();
+        $tableCar.appendChild(app().createNewCar());
+      },
+
+      createNewCar: function createNewCar(){
+        var $fragment = document.createDocumentFragment();
+        var $tr = document.createElement('tr');
+        var $image = document.createElement('img');
+        var $tdImage = document.createElement('td');
+        var $tdBrand = document.createElement('td');
+        var $tdModel = document.createElement('td');
+        var $tdYear = document.createElement('td');
+        var $tdColor = document.createElement('td');
+        var $tdPlate = document.createElement('td');
+
+        $image.src = $('[data-js="url"]').get().value;
+        $tdImage.appendChild($image);
+
+        $tdBrand.textContent = $('[data-js="marca"]').get().value;
+        $tdModel.textContent = $('[data-js="modelo"]').get().value;
+        $tdYear.textContent = $('[data-js="ano"]').get().value;
+        $tdColor.textContent = $('[data-js="cor"]').get().value;
+        $tdPlate.textContent = $('[data-js="placa"]').get().value;
+
+        $tr.appendChild($tdImage);
+        $tr.appendChild($tdBrand);
+        $tr.appendChild($tdModel);
+        $tr.appendChild($tdYear);
+        $tr.appendChild($tdPlate);
+        $tr.appendChild($tdColor);
+
+        return $fragment.appendChild($tr);
+
+      },
+
       autoAjaxCompany: function autoAjaxCompany(){
         var ajaxCompany = new XMLHttpRequest();
-        ajaxCompany.open('GET', 'company.json');
+        ajaxCompany.open('GET', 'company.json', true);
         ajaxCompany.send();
         ajaxCompany.addEventListener('readystatechange', this.getDataEmp, false);
         },
 
       getDataEmp: function getDataEmp(){
-        if( app().isRequestOk.call(this) ){
+        if( !app().isRequestOk.call(this) )
+          return;
         var dataEmp = JSON.parse(this.responseText);
-        var $company = new DOM('[data-js="nome-empresa"]');
-        var $phone = new DOM('[data-js="telefone-empresa"]');
-        $company.textContent = dataEmp.name;
-        $phone.textContent = dataEmp.phone;
-          }
+        var $company = $('[data-js="nome-empresa"]');
+        var $phone = $('[data-js="telefone-empresa"]');
+        $company.get().textContent = dataEmp.name;
+        $phone.get().textContent = dataEmp.phone;
         },
 
       isRequestOk: function isRequestOk(){

@@ -2,43 +2,40 @@
   'use strict';
 
   function DOM(elements){
+    if(!(this instanceof DOM))
+      return new DOM(elements);
     this.element = doc.querySelectorAll(elements);
-    if(this.element.length === 1)
-      return this.get();
-    this.isArray = function isArray(obj){
+    }
+
+  DOM.isArray = function isArray(obj){
       return Object.prototype.toString.call(obj) === '[object Array]';
     }
 
-    this.isObject = function isObject(obj){
+  DOM.isObject = function isObject(obj){
       return Object.prototype.toString.call(arguments) === '[object Object]';
     }
 
-    this.isString = function isString(obj){
+  DOM.isString = function isString(obj){
       return Object.prototype.toString.call(arguments) === '[object String]';
     }
 
-    this.isNumber = function isNumber(obj){
+  DOM.isNumber = function isNumber(obj){
       return Object.prototype.toString.call(obj) === '[object Number]';
     }
 
-    this.isFunction = function isFunction(obj){
-      return Object.prototype.toString.call(obj) === '[object Function]';
-    }
-
-    this.isBoolean = function isBoolean(obj){
+  DOM.isBoolean = function isBoolean(obj){
       return Object.prototype.toString.call(obj) === '[object Boolean]';
     }
 
-    this.isNull = function isNull(obj){
+  DOM.isNull = function isNull(obj){
       return Object.prototype.toString.call(obj) === '[object Null]' || Object.prototype.toString.call(obj) === '[object Undefined]';
     }
-  }
 
   DOM.prototype.on = function on(event, callback){
-      Array.prototype.forEach.call(this.element, function(element){
-        element.addEventListener(event, callback, false);
-      });
-    }
+    Array.prototype.forEach.call(this.element, function(element){
+      element.addEventListener(event, callback, false);
+    });
+  }
 
   DOM.prototype.off = function off(event, callback){
       Array.prototype.forEach.call(this.element, function(element){
@@ -50,7 +47,7 @@
     if(!index)
       return this.element[0];
     return this.element[index];
-    }
+  }
 
   DOM.prototype.forEach = function forEach(){
     return Array.prototype.forEach.apply( this.element, arguments );

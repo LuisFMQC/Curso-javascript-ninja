@@ -83,17 +83,8 @@
       setData(adress);
     }
     else{
-<<<<<<< HEAD
-    getMessages('ok');
-    $logradouro.get()[0].textContent = endereco.logradouro;
-    $estado.get()[0].textContent = endereco.uf;
-    $cidade.get()[0].textContent = endereco.localidade;
-    $bairro.get()[0].textContent = endereco.bairro;
-    $cep.get()[0].textContent = endereco.cep;
-=======
       getMessages('ok');
       setData(adress);
->>>>>>> 49169b311596b104c5ea42dd048678360fb41062
     }
   }
 
@@ -138,18 +129,6 @@
       return message.replace('[CEP]', getCepClean());
   }
 
-<<<<<<< HEAD
-  return {
-    getMessages: getMessages,
-    replaceCep: replaceCEP
-  };
-}
-
-window.app = app;
-app();
-
-})(window.DOM);
-=======
   function setData(adress){
     $logradouro.get()[0].textContent = adress.logradouro;
     $estado.get()[0].textContent = adress.uf;
@@ -157,6 +136,16 @@ app();
     $bairro.get()[0].textContent = adress.bairro;
     $cep.get()[0].textContent = adress.cep;
   }
+  return {
+    getMessages: getMessages,
+    replaceCep: replaceCEP
+  };
+}
 
-})(document);
->>>>>>> 49169b311596b104c5ea42dd048678360fb41062
+
+window.app = app;
+app();
+
+})(window.DOM);
+
+
