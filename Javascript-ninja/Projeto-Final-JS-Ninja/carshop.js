@@ -40,15 +40,16 @@
           this.autoAjaxCompany();
           this.initEvents();
         },
-  
+        
         initEvents: function initEvents(){
           $('[data-js="form-cars"]').on('submit', this.handleSubmitCar);
         },
-  
+        
         handleSubmitCar: function handleSubmitCar(event){
           event.preventDefault();
           var $tableCar = $('[data-js="table-cars"]').get();
           $tableCar.appendChild(app().createNewCar());
+          app().removeCar();
         },
   
         createNewCar: function createNewCar(){
@@ -61,26 +62,44 @@
           var $tdYear = document.createElement('td');
           var $tdColor = document.createElement('td');
           var $tdPlate = document.createElement('td');
-  
+          var $tdRemove = document.createElement('td');
+          var $remove = document.createElement('button');
+          
+          $remove.textContent = 'Remove';
+          $remove.setAttribute('class', 'remove');
+          $tdRemove.appendChild($remove);
+          $tdRemove.setAttribute('data-js', 'remove');
+          
           $image.src = $('[data-js="url"]').get().value;
           $tdImage.appendChild($image);
-  
+          
           $tdBrand.textContent = $('[data-js="marca"]').get().value;
           $tdModel.textContent = $('[data-js="modelo"]').get().value;
           $tdYear.textContent = $('[data-js="ano"]').get().value;
           $tdColor.textContent = $('[data-js="cor"]').get().value;
           $tdPlate.textContent = $('[data-js="placa"]').get().value;
-  
+          
           $tr.appendChild($tdImage);
           $tr.appendChild($tdBrand);
           $tr.appendChild($tdModel);
           $tr.appendChild($tdYear);
           $tr.appendChild($tdPlate);
           $tr.appendChild($tdColor);
-  
+          $tr.appendChild($tdRemove);
+                   
           return $fragment.appendChild($tr);
-  
         },
+        
+        removeCar: function removeCar(){
+          $('[class="remove"]').on('click', this.handleRemoveCar);
+        }, 
+
+        handleRemoveCar: function handleRemoveCar(event){
+          event.preventDefault();
+          $('[class="remove"]').get().parentElement.parentElement.remove();
+        },
+        
+    
   
         autoAjaxCompany: function autoAjaxCompany(){
           var ajaxCompany = new XMLHttpRequest();
