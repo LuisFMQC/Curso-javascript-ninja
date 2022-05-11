@@ -32,9 +32,8 @@
     */
   
     function app(){
-  
-  
-  
+      
+
       return {
         init: function init(){
           this.autoAjaxCompany();
@@ -70,6 +69,7 @@
           $tdRemove.appendChild($remove);
           $tdRemove.setAttribute('data-js', 'remove');
           
+          
           $image.src = $('[data-js="url"]').get().value;
           $tdImage.appendChild($image);
           
@@ -91,16 +91,13 @@
         },
         
         removeCar: function removeCar(){
-          $('[class="remove"]').on('click', this.handleRemoveCar);
+          $('[class="remove"]').on('click', app().handleRemoveCar);
         }, 
 
         handleRemoveCar: function handleRemoveCar(event){
-          event.preventDefault();
-          $('[class="remove"]').get().parentElement.parentElement.remove();
+         event.target.parentNode.parentNode.remove();      
         },
         
-    
-  
         autoAjaxCompany: function autoAjaxCompany(){
           var ajaxCompany = new XMLHttpRequest();
           ajaxCompany.open('GET', 'company.json', true);
@@ -125,5 +122,6 @@
     }
   
   app().init();
+  
   
   })(window.DOM);
