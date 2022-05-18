@@ -2,23 +2,25 @@
 
 var express = require('express');
 var cors = require('cors');
+var bodyParser = require('body-parser');
 var app = express();
 
 var users = {
   joao: {
-    nome: 'João',
-    idade: 30
+    username: 'João',
+    age: 30
   },
   maria: {
-    nome: 'Maria',
-    idade: 18
+    username: 'Maria',
+    age: 18
   },
   fernando: {
-    nome: 'Fernando',
-    idade: 28
+    username: 'Fernando',
+    age: 28
   }
 };
 
+app.use(bodyParser.urlencoded( { extended: false } ));
 app.use(cors());
 
 app.get('/', function(req, res){
@@ -35,5 +37,9 @@ app.get('/user/:username', function(req, res){
     return res.json(users[username]);
   res.status(404).json({ error: 'Usuário não encontrado!'});
 });
+
+app.post('/user', function(req, res){
+  req.body
+})
 
 app.listen(3000);
